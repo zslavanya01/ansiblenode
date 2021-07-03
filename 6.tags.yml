@@ -1,0 +1,14 @@
+- name: Demo on tags
+  hosts: all
+  tasks:
+    - name: print redhat
+      debug:
+        msg: Hello Redhat
+      tags:
+        - Redhat
+
+    - name: print centos
+      debug:
+        msg: Hello Centos
+      tags:
+        - Centos
