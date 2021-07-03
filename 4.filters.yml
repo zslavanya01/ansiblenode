@@ -1,0 +1,8 @@
+- name: Demo on filters
+  hosts: all
+  vars:
+    URL: https://github.com/zelar-soft-todoapp/frontend/archive/main.zip
+  taks:
+    - name: Print file of a URL
+      debug:
+        msg: "{{ URL | urlsplit }}"
