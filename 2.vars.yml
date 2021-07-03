@@ -1,16 +1,46 @@
 - name: Demo on vars
   hosts: all
+  vars_files:
+    - example-vars.yml
   vars:
     URL: play.example.com
     PROJECT: example
-  vars_files:
-    - example-vars.yml
+  vars_prompt:
+    - name: URL
+      prompt: Enter URL
+      private: no
   tasks:
-    - name: Print URL
+    - name: print URL
       debug:
         msg: URL = {{ URL }}
-    - name: Print URL from Task
+    - name: print URL from task
       debug:
         msg: URL = {{ URL }}
       vars:
         URL: task.example.com
+
+- name: Demo on Dynamic vars
+  hosts: all
+  tasks:
+    - name: Gather date
+      shell: date +%F
+      register: out
+
+    - name: Print Date
+      debug:
+        msg: Date = {{ out.stdout }}
+
+    - name: Set a fact
+      set_fact:
+        DATE: "{{ out.stdout }}"
+
+    - name: Print DATE
+      debug:
+        msg: DATE = {{ DATE }}
+
+- name: Print some facts
+  hosts: all
+  tasks:
+    - name: Print facts
+      debug:
+        msg: Hostname = {{ ansible_hostname }}
