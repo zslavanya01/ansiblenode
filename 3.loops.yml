@@ -1,11 +1,43 @@
-- name: Demo on loops
+- name: demo on loops
   hosts: all
   tasks:
-    - name: Print colours name
+    - name: print course names
       debug:
-        msg: "colours = {{ item }}"
+        msg: "course = {{ item }}"
       loop:
-        - sky blue
-        - baby pink
-        - orange
-        - black
+        - azure
+        - devops
+        - aws
+        - java
+        - nodejs
+
+    - name: create servers
+      debug:
+        msg: "{{ iteam.name }}"
+      loop:
+        - name: server1
+          disks: 3gb
+          ram: 15Gb
+          network:
+            nic01: 100Gb
+            nic01: 10Gb
+        - name: server2
+          disks: 3gb
+          ram: 15Gb
+          network:
+            nic01: 100Gb
+            nic01: 10Gb
+      loop_control:
+        label: "{{ item.name }}"  
+
+    - name: no.of courses
+      debug:
+        msg: "{{ item }} with index {{ my_idx }}"
+      loop:
+        - azure
+        - devops
+        - aws
+        - java
+        - nodejs
+      loop_control:
+        index_var: my_idx
