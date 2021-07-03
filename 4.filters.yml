@@ -2,7 +2,18 @@
   hosts: all
   vars:
     URL: https://github.com/zelar-soft-todoapp/frontend/archive/main.zip
-  taks:
-    - name: Print file of a URL
+    tag_data:
+          Environment: dev
+          Application: payment
+  tasks:
+    - name: Print filename of a URL
       debug:
         msg: "{{ URL | urlsplit }}"
+
+    - name: print last column
+      debug:
+        msg: "{{ URL.split('/') | last }}"
+
+    - name: Print tag data
+      debug:
+        msg: "{{ tag_data | dict2items }}"
