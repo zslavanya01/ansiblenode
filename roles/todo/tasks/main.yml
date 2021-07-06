@@ -1,0 +1,15 @@
+- name: Install npm
+  apt:
+    name: npm
+    state: present
+    update_cache: yes
+
+- name: Install nodejs
+  apt: 
+    name: nodejs
+    state: present
+
+- name: Start todo service
+  systemd:
+    name: todo
+    state: started

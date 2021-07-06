@@ -1,0 +1,14 @@
+- name: Install java
+  apt:
+    name: java
+    state: present
+    update_cache: yes
+- name: Install mvn package
+  apt:
+    name: maven
+    state: present
+    
+- name: Start users service
+  systemd:
+    name: users
+    state: started
