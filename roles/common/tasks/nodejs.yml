@@ -1,0 +1,23 @@
+- name: Download {{COMPONENT}} from nexus
+  get_url:
+    url: http://:8081/repository/{{COMPONENT}}/{{COMPONENT}}-{{APP_VERSION}}.zip
+    dest: /tmp/{{COMPONENT}}.zip
+    username: admin
+    password: admin123
+
+- name: Clean the old artifacts
+  file:
+    path: /home/todoapp/{{COMPONENT}}
+    state: absent
+
+- name: Copy {{COMPONENT}} Service file
+  copy:
+    src: "{{COMPONENT}}.service"
+    dest: /etc/systemd/system/{{COMPONENT}}.service
+
+- name: start {{COMPONENT}} service
+  systemd:
+    name: "{{COMPONENT}}"
+    daemon_reload: yes
+    state: started
+    enabled: yes
