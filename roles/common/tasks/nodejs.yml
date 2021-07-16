@@ -5,26 +5,9 @@
     state: present
 
 
-- name: Download {{COMPONENT}} from nexus
-  get_url:
-    url: http://172.31.1.61:8081/repository/{{COMPONENT}}/{{COMPONENT}}-{{APP_VERSION}}.zip
-    dest: /tmp/{{COMPONENT}}.zip
-    username: admin
-    password: admin123
+- name: Download artifacts from nexus
+  include_tasks: download-nexus-artifacts.yml
 
-- name: Clean the old artifacts
-  file:
-    path: /home/todoapp/{{COMPONENT}}
-    state: absent
+- name: setup systemd service 
+  include_tasks: setup-systemd.yml
 
-- name: Copy {{COMPONENT}} Service file
-  copy:
-    src: "{{COMPONENT}}.service"
-    dest: /etc/systemd/system/{{COMPONENT}}.service
-
-- name: start {{COMPONENT}} service
-  systemd:
-    name: "{{COMPONENT}}"
-    daemon_reload: yes
-    state: started
-    enabled: yes
