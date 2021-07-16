@@ -10,3 +10,9 @@
   apt:
     name: maven
     state: present
+
+- name: Download artifacts from nexus
+  include_tasks: download-nexus-artifacts.yml
+
+- name: setup systemd service 
+  include_tasks: setup-systemd.yml
