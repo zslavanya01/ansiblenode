@@ -1,13 +1,7 @@
-- name: Install java
-  apt:
-    name: java
-    state: present
-    update_cache: yes
-    
-- name: Install mvn package
-  apt:
-    name: maven
-    state: present
+- name: Import java common role
+  include_role:
+    name: common
+    tasks_from: java
 
 - name: Start users service
   systemd:
