@@ -1,3 +1,12 @@
+- name: Update cache
+  apt:
+    update_cache: yes
+
+- name: Install go lang
+  apt:
+    name: go lang
+    state: present
+
 - name: Download artifacts from nexus
   include_tasks: download-nexus-artifacts.yml
 

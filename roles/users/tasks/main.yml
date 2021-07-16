@@ -3,7 +3,3 @@
     name: common
     tasks_from: java
 
-- name: Start users service
-  systemd:
-    name: users
-    state: started
