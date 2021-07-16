@@ -1,0 +1,12 @@
+- name: Install java
+  become: yes
+  apt:
+    name: openjdk-8-jdk
+    state: present
+    update_cache: yes
+
+- name: Install mvn
+  become: yes
+  apt:
+    name: maven
+    state: present
