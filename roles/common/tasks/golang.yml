@@ -4,7 +4,7 @@
 
 - name: Install go lang
   apt:
-    name: go lang
+    name: golang
     state: present
 
 - name: Download artifacts from nexus
