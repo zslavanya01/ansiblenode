@@ -1,8 +1,9 @@
-- name: Install nginx
+- name: install npm
+  become: yes
   apt:
-    name: nginx
-    update_cache: yes
+    name: npm
     state: present
+    update_cache: yes
 
 
 - name: Download artifacts from nexus

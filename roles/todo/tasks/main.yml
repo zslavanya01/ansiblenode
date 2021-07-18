@@ -1,14 +1,5 @@
 - name: Import node common role
   include_role:
     name: common
-    tasks_from: node
+    tasks_from: nodejs.yml
 
-- name: Install nodejs
-  apt: 
-    name: nodejs
-    state: present
-
-- name: Start todo service
-  systemd:
-    name: todo
-    state: started
