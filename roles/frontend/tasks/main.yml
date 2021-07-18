@@ -38,11 +38,11 @@
 
     - name: start nginx
       systemd:
-        state: started
+        state: restarted
         name: nginx
         enabled: yes
 
-    - name: To start npm
+    - name: Start the node app
       shell: npm start
       args:
-       chdir: /var/www/html/
+          chdir: /var/www/html/
