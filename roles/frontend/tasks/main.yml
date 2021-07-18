@@ -11,14 +11,7 @@
         username: admin
         password: admin123
 
-    - name: Delete the default content
-      file:
-        path: "{{ item }}"
-        state: absent
-      loop:
-        - /etc/nginx/sites-enabled/default
-        - /etc/nginx/sites-available/default
-
+   
     - name: Create HtDocs Directory
       file:
         path: /var/www/html/
@@ -30,14 +23,26 @@
         dest: /var/www/html/
         remote_src: yes
 
-    - name: Update Todoshop Config file
+    - name: Update Todoshop index file
       template:
-        src: todo.conf
-        dest: /etc/nginx/sites-enabled/todo.conf
+        src: index.js
+        dest: /var/www/html/config/index.js
       notify: Restart nginx
+  
+    - name: Replace dist content
+      replace:
+        path: /etc/nginx/sites-enabled/default
+        regexp: root /var/www/html;
+        replace: root /var/www/html/dist;
+
 
     - name: start nginx
       systemd:
         state: started
         name: nginx
         enabled: yes
+
+    - name: To start npm
+      shell: npm start
+      args:
+       chdir: /var/www/html/
