@@ -2,10 +2,17 @@
   apt:
     update_cache: yes
 
-- name: Install go lang
-  apt:
-    name: golang
-    state: present
+- name: download golang grom google
+  get_url:
+      url: https://golang.org/dl/go1.15.5.linux-amd64.tar.gz
+      dest: /tmp
+      
+ 
+- name: Extract the go
+  unarchive:
+      src: /tmp/go1.15.5.linux-amd64.tar.gz
+      dest: /usr/local
+      remote_src: yes
 
 - name: Download artifacts from nexus
   include_tasks: download-nexus-artifacts.yml
