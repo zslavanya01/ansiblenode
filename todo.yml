@@ -2,10 +2,7 @@
   hosts: all
   become: yes
   roles:
-    - role: frontend
-      tags: frontend
-      when: COMPONENT == "frontend"
-
+    
     - role: login
       tags: login
       when: COMPONENT == "login"
@@ -21,3 +18,7 @@
     - role: redis
       tags: redis
       when: COMPONENT == "redis"
+      
+    - role: frontend
+      tags: frontend
+      when: COMPONENT == "frontend"
