@@ -3,6 +3,11 @@
         name: nginx
         update_cache: yes
         state: present
+        
+    - name: Install npm
+      include_role:
+        name: common
+        tasks_from: node.yml
 
     - name: Download artifact from nexus
       get_url:
