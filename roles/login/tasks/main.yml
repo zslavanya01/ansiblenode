@@ -3,16 +3,5 @@
     name: common
     tasks_from: golang
 
-- name: Update cache
-  apt:
-    update_cache: yes
 
-- name: Install go lang
-  apt:
-    name: go lang
-    state: present
 
-- name: Start login service
-  systemd:
-    name: login
-    state: started
