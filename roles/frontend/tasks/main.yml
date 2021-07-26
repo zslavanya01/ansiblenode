@@ -21,7 +21,7 @@
     state: directory
 - name: Download frontend component
   get_url:
-    url: http://192.168.0.69:8081/repository/{{COMPONENT}}/{{COMPONENT}}-{{APP_VERSION}}.zip
+    url: http://172.31.1.61:8081/repository/{{COMPONENT}}/{{COMPONENT}}-{{APP_VERSION}}.zip
     dest: /tmp
     username: admin
     password: admin123
