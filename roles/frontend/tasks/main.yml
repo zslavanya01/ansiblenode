@@ -1,49 +1,49 @@
 - name: Install Nginx
-      apt:
-        name: nginx
-        update_cache: yes
-        state: present
+  apt:
+    name: nginx
+    update_cache: yes
+    state: present
         
-    - name: Install npm
-      include_role:
-        name: common
-        tasks_from: node.yml
+- name: Install npm
+  include_role:
+      name: common
+      tasks_from: node.yml
 
-    - name: Download artifact from nexus
-      get_url:
-        url: http://172.31.1.61:8081/repository/frontend/frontend-{{APP_VERSION}}.zip
-        dest: /tmp/frontend.zip
-        username: admin
-        password: admin123
+- name: Download artifact from nexus
+  get_url:
+    url: http://172.31.1.61:8081/repository/frontend/frontend-{{APP_VERSION}}.zip
+    dest: /tmp/frontend.zip
+    username: admin
+    password: admin123
 
    
-    - name: Create HtDocs Directory
-      file:
-        path: /var/www/html/
-        state: directory
+- name: Create HtDocs Directory
+  file:
+    path: /var/www/html/
+    state: directory
 
-    - name: extract the todo content
-      unarchive:
-        src: /tmp/frontend.zip
-        dest: /var/www/html/
-        remote_src: yes
+- name: extract the todo content
+  unarchive:
+    src: /tmp/frontend.zip
+    dest: /var/www/html/
+    remote_src: yes
 
-    - name: Update Todoshop index file
-      template:
-        src: index.js
-        dest: /var/www/html/config/index.js
-      notify: Restart nginx
+- name: Update Todoshop index file
+  template:
+    src: index.js
+    dest: /var/www/html/config/index.js
+    notify: Restart nginx
   
-    - name: Replace dist content
-      replace:
-        path: /etc/nginx/sites-enabled/default
-        regexp: root /var/www/html;
-        replace: root /var/www/html/dist;
+- name: Replace dist content
+  replace:
+    path: /etc/nginx/sites-enabled/default
+    regexp: root /var/www/html;
+    replace: root /var/www/html/dist;
 
 
-    - name: start nginx
-      systemd:
-        state: restarted
-        name: nginx
-        enabled: yes
+- name: start nginx
+  systemd:
+    state: restarted
+    name: nginx
+    enabled: yes
 
