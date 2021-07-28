@@ -34,8 +34,9 @@
 - name: Insert the conf file
   template:
     src: todo.conf
-    dest: /etc/nginx/sites-enabled/todo.conf
+    dest: /var/www/html/config/todo.conf
   notify: Restart Nginx
+  
 - name: Start Nginx
   systemd:
     state: started
