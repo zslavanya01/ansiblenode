@@ -40,7 +40,6 @@
     regexp: root /var/www/html;
     replace: root /var/www/html/dist;
 
-
 - name: start nginx
   systemd:
     state: restarted
